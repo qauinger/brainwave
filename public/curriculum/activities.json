@@ -1,0 +1,276 @@
+{
+    "additionFactsOfNum": {
+        "name": "Addition Facts of #",
+        "topic": "addition",
+        "properties": {
+            "sum": {
+                "label": "Sum",
+                "type": "number",
+                "min": 0,
+                "default": 10
+            },
+            "equationFormat": {
+                "label": "Equation format",
+                "type": "selectMultiple",
+                "options": {
+                    "sumLast": "# + # = #",
+                    "sumFirst": "# = # + #"
+                },
+                "default": [
+                    "sumLast"
+                ]
+            },
+            "missingPosition": {
+                "label": "Missing Position",
+                "type": "selectMultiple",
+                "options": {
+                    "addend1": "First Addend",
+                    "addend2": "Second Addend",
+                    "sum": "Sum"
+                },
+                "default": [
+                    "sum"
+                ]
+            },
+            "numberOfQuestions": {
+                "label": "Number of Questions",
+                "type": "multi",
+                "options": {
+                    "exactly": {
+                        "label": "Exactly",
+                        "type": "number",
+                        "min": 1,
+                        "default": 25
+                    },
+                    "untilScore": {
+                        "label": "Until Score",
+                        "type": "number",
+                        "min": 1,
+                        "default": 25
+                    },
+                    "unlimited": {
+                        "label": "Unlimited",
+                        "type": "label"
+                    }
+                },
+                "default": "exactly"
+            }
+        }
+    },
+    "addingNum": {
+        "name": "Adding #",
+        "topic": "addition",
+        "properties": {
+            "addend": {
+                "label": "Addend",
+                "type": "multi",
+                "options": {
+                    "specific": {
+                        "label": "Specific",
+                        "type": "number",
+                        "min": 0,
+                        "default": 1
+                    },
+                    "range": {
+                        "label": "Range",
+                        "type": "range",
+                        "min": 0,
+                        "defaultmin": 0,
+                        "defaultmax": 5,
+                        "default": 0
+                    }
+                },
+                "default": "specific"
+            },
+            "maxSum": {
+                "label": "Sum Should not Exceed",
+                "type": "number",
+                "min": 0,
+                "default": 10
+            },
+            "missingPosition": {
+                "label": "Missing Position",
+                "type": "selectMultiple",
+                "options": {
+                    "addend1": "First Addend",
+                    "addend2": "Second Addend",
+                    "sum": "Sum"
+                },
+                "default": [
+                    "sum"
+                ]
+            },
+            "equationFormat": {
+                "label": "Equation Format",
+                "type": "selectMultiple",
+                "options": {
+                    "sumLast": "# + # = #",
+                    "sumFirst": "# = # + #"
+                },
+                "default": [
+                    "sumLast"
+                ]
+            },
+            "numberOfQuestions": {
+                "label": "Number of Questions",
+                "type": "multi",
+                "options": {
+                    "exactly": {
+                        "label": "Exactly",
+                        "type": "number",
+                        "min": 1,
+                        "default": 25
+                    },
+                    "untilScore": {
+                        "label": "Until Score",
+                        "type": "number",
+                        "min": 1,
+                        "default": 25
+                    },
+                    "unlimited": {
+                        "label": "Unlimited",
+                        "type": "label"
+                    }
+                },
+                "default": "exactly"
+            }
+        }
+    },
+    "subtractionFactsOfNum": {
+        "name": "Subtraction Facts of #",
+        "topic": "subtraction",
+        "properties": {
+            "factsOf": {
+                "label": "Minuend",
+                "type": "number",
+                "min": 0,
+                "default": 10
+            },
+            "equationFormat": {
+                "label": "Equation format",
+                "type": "selectMultiple",
+                "options": {
+                    "sumLast": "# - # = #",
+                    "sumFirst": "# = # - #"
+                },
+                "default": [
+                    "sumLast"
+                ]
+            },
+            "missingPosition": {
+                "label": "Missing Position",
+                "type": "selectMultiple",
+                "options": {
+                    "minuend": "Minuend",
+                    "subtrahend": "Subtrahend",
+                    "difference": "Difference"
+                },
+                "default": [
+                    "difference"
+                ]
+            },
+            "numberOfQuestions": {
+                "label": "Number of questions",
+                "type": "multi",
+                "options": {
+                    "exactly": {
+                        "label": "Exactly",
+                        "type": "number",
+                        "min": 1,
+                        "default": 25
+                    },
+                    "untilScore": {
+                        "label": "Until Score",
+                        "type": "number",
+                        "min": 1,
+                        "default": 25
+                    },
+                    "unlimited": {
+                        "label": "Unlimited",
+                        "type": "label"
+                    }
+                },
+                "default": "exactly"
+            }
+        }
+    },
+    "subtractingNum": {
+        "name": "Subtracting #",
+        "topic": "subtraction",
+        "properties": {
+            "subtrahend": {
+                "label": "Subtrahend",
+                "type": "multi",
+                "options": {
+                    "specific": {
+                        "label": "Specific",
+                        "type": "number",
+                        "min": 0,
+                        "default": 0
+                    },
+                    "range": {
+                        "label": "Range",
+                        "type": "range",
+                        "min": 0,
+                        "defaultmin": 0,
+                        "defaultmax": 5,
+                        "default": 0
+                    }
+                },
+                "default": "specific"
+            },
+            "minuend": {
+                "label": "Minuend",
+                "type": "number",
+                "min": 0,
+                "default": 10
+            },
+            "missingPosition": {
+                "label": "Missing Position",
+                "type": "selectMultiple",
+                "options": {
+                    "minuend": "Minuend",
+                    "subtrahend": "Subtrahend",
+                    "difference": "Difference"
+                },
+                "default": [
+                    "difference"
+                ]
+            },
+            "equationFormat": {
+                "label": "Equation Format",
+                "type": "selectMultiple",
+                "options": {
+                    "sumLast": "# - # = #",
+                    "sumFirst": "# = # - #"
+                },
+                "default": [
+                    "sumLast"
+                ]
+            },
+            "numberOfQuestions": {
+                "label": "Number of Questions",
+                "type": "multi",
+                "options": {
+                    "exactly": {
+                        "label": "Exactly",
+                        "type": "number",
+                        "min": 1,
+                        "default": 25
+                    },
+                    "untilScore": {
+                        "label": "Until Score",
+                        "type": "number",
+                        "min": 1,
+                        "default": 25
+                    },
+                    "unlimited": {
+                        "label": "Unlimited",
+                        "type": "label"
+                    }
+                },
+                "default": "exactly"
+            }
+        }
+    }
+}

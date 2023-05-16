@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Staatliches&display=swap');
+
+body {
+    background-color: #210042;
+}
+
+h1 {
+    font-family: 'Staatliches', cursive;
+    color: white;
+    font-size:86px;
+    margin: 0px auto;
+}
+
+h2 {
+    font-family: 'Staatliches', cursive;
+    color: white;
+    font-size:36px;
+    margin-bottom: 0px;
+}
+
+h3 {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-size:36px;
+    margin-bottom: 0px;
+}
+
+h4 {
+    font-family: 'Staatliches', cursive;
+    color: white;
+    font-size:24px;
+    margin-bottom: 0px;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-size:24px;
+    margin-top: 0px;
+    padding-left: 30px;
+}
+
+.fs36 {
+    font-size: 36px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+#header a, #header a img {
+    height: 72px;
+    font-size: 48px;
+    font-family: 'Staatliches', cursive;
+    vertical-align: middle;
+}
+
+.slide-r-hover:hover {
+    animation: slide-right 0.5s ease;
+    margin-left: 30px;
+}
+
+.slide-r-hover::after {
+    content: " ›";
+}
+
+@keyframes slide-right {
+    0% {
+        margin-left: 0px;
+    }
+
+    100% {
+        margin-left: 30px;
+    }
+}
+
+.slide-l-hover:hover {
+    animation: slide-left 0.5s ease;
+    margin-left: -30px;
+}
+
+.slide-l-hover::before {
+    content: "‹ ";
+}
+
+@keyframes slide-left {
+    0% {
+        margin-left: 0px;
+    }
+
+    100% {
+        margin-left: -30px;
+    }
+}
+
+.bwgradient, .bwgradient-hover:hover {
+    background: linear-gradient(90deg, #FE8679, #EB4D6F, #877AA2, #23A6D5, #23D5AB);
+    background-size: 400% 400%;
+    animation: bwgradient 25s infinite ease;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+}
+
+@keyframes bwgradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.color-hover:hover {
+    color: var(--data-color-hover);
+}
+
+.gray {
+    color: gray;
+}
+
+.floatr {
+    float: right;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.cursor-copy {
+    cursor: copy;
+}
+
+div.indent {
+    padding-left: 30px;
+}

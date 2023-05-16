@@ -1,0 +1,71 @@
+#activity-container {
+    margin-top: 20px;
+    columns: 3;
+    column-gap: 10px;
+}
+
+.activity-topic {
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+.activity-topic h2 {
+    margin: 0px;
+    padding-left: 10px;
+}
+
+.activity-topic div {
+    padding: 15px 10px 0px 10px;
+    box-shadow: -5px 0 0 0;
+}
+
+.activity-topic-title {
+    width: 50%;
+    box-shadow: 0 5px 0 0;
+}
+
+label {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-size: 24px;
+    vertical-align: middle;
+}
+
+input {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    background-color: #877AA2;
+    font-size: 24px;
+    vertical-align: middle;
+    height: 1em;
+    width: 3em;
+    padding: 3px;
+    margin: 3px 5px;
+}
+
+input[type=checkbox], input[type=radio] {
+    width: 1em;
+    height: 1em;
+}
+
+input[type=text] {
+    width: 30%;
+}
+
+.wide {
+    width: 50%;
+}
+
+.inline {
+    display: flex;
+    flex-direction: row;
+}
+
+input:disabled, .disabled-label {
+    color: rgba(164, 131, 186, 0.447);
+}
+
+.property {
+    margin-top: 20px;
+}

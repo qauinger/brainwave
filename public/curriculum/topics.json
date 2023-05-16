@@ -1,0 +1,11 @@
+{
+    "addition": {
+        "name": "Addition",
+        "color": "#23d5ab"
+    },
+    "subtraction": {
+        "name": "Subtraction",
+        "color": "#eb4d6f"
+    }
+}
+  
