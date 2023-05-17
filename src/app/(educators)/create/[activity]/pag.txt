@@ -1,15 +1,15 @@
 'use client';
-import '../../../../../public/css/create.css';
+import '../create.css';
 import { useState, useEffect } from 'react';
-import { SlideButtonR } from '../../components/SlideButton'
+import { SlideButtonR } from '@components/SlideButton'
 
-import activities from '../../../../../public/curriculum/activities.json';
+import activities from '@curriculum/activities.json';
 
 export default function Activity({params}) {
-    var activity = params.activity;
 
+    var activity = params['activity'];
     if(!Object.keys(activities).includes(activity)) {
-        return(<NotFound/>)
+        return(<h1>Not found</h1>)
     }
 
     const formData = {};
@@ -21,7 +21,9 @@ export default function Activity({params}) {
         "title": {
             "label": "Activity Title",
             "type": "string",
-            "default": activities[activity]['name']
+            "attributes": {
+                "default": activities[activity]['name']
+            }
         }
     }
     
@@ -91,7 +93,7 @@ function LabelProperty(props) {
 }
 
 function NumberProperty(props) {
-    const [value, setValue] = useState(props.data.default);
+    const [value, setValue] = useState(props.data.attributes.default);
 
     const handleChange = (e) => {
         setValue(e.target.value);
@@ -118,7 +120,7 @@ function NumberProperty(props) {
 }
 
 function StringProperty(props) {
-    const [value, setValue] = useState(props.data.default);
+    const [value, setValue] = useState(props.data.attributes.default);
 
     const handleChange = (e) => {
         setValue(e.target.value);
@@ -143,7 +145,7 @@ function StringProperty(props) {
 }
 
 function CheckboxProperty(props) {
-    const [selected, setSelected] = useState(new Set(props.data.default));
+    const [selected, setSelected] = useState(new Set(props.data.attributes.default));
 
     const handleChange = (e) => {
         selected.has(String(e.target.id).substring(String(props.id).length + 1)) ? selected.delete(String(e.target.id).substring(String(props.id).length + 1)) : selected.add(String(e.target.id).substring(String(props.id).length + 1));
@@ -157,7 +159,7 @@ function CheckboxProperty(props) {
     return (
         <div>
             <label className={props.disabled ? 'disabled-label':''}>{props.data.label}:</label>
-            {Object.keys(props.data.options).map((option) =>
+            {Object.keys(props.data.attributes.options).map((option) =>
                 <div key={option}>
                     <input
                         type='checkbox'
@@ -166,7 +168,7 @@ function CheckboxProperty(props) {
                         onChange={handleChange}
                         disabled={props.disabled}
                         />
-                    <label htmlFor={props.id + '-' + option} className={props.disabled ? 'disabled-label':''}>{props.data.options[option]}</label>
+                    <label htmlFor={props.id + '-' + option} className={props.disabled ? 'disabled-label':''}>{props.data.attributes.options[option]}</label>
                 </div>
             )}
         </div>
@@ -174,8 +176,8 @@ function CheckboxProperty(props) {
 }
 
 function RangeProperty(props) {
-    const [min, setMin] = useState(props.data.defaultmin);
-    const [max, setMax] = useState(props.data.defaultmax);
+    const [min, setMin] = useState(props.data.attributes.defaultmin);
+    const [max, setMax] = useState(props.data.attributes.defaultmax);
 
     const handleMinChange = (e) => {
         setMin(e.target.value);
@@ -213,7 +215,7 @@ function RangeProperty(props) {
 }
 
 function MultiProperty(props) {
-    const [selected, setSelected] = useState(props.data.default);
+    const [selected, setSelected] = useState(props.data.attributes.default);
     const [data, setData] = useState(new Map());
 
     const updateData = (id, d) => {
@@ -237,7 +239,7 @@ function MultiProperty(props) {
     return (
         <div>
             <label>{props.data.label}:</label>
-            {Object.keys(props.data.options).map((option) =>
+            {Object.keys(props.data.attributes.options).map((option) =>
                 <div key={option} className="inline">
                     <input
                         type='radio'
@@ -245,7 +247,7 @@ function MultiProperty(props) {
                         checked={selected === option ? true : false}
                         onChange={(e) => handleChange(e, option)}
                     />
-                    <Property id={props.id + '-' + option} multikey={option} updateData={updateData} data={props.data.options[option]} disabled={selected === option ? false : true}/>
+                    <Property id={props.id + '-' + option} multikey={option} updateData={updateData} data={props.data.attributes.options[option]} disabled={selected === option ? false : true}/>
                 </div>
             )}
         </div>

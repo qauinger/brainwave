@@ -20,9 +20,12 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/*": ["./src/*"],
+      "@components/*": ["src/app/components/*"],
+      "@curriculum/*": ["public/curriculum/*"]
+    },
+    "baseUrl": "."
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/create/page.js", "src/app/components/Header.js", "src/app/components/SlideButton.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/create/page.js", "src/app/components/Header.js", "src/app/components/SlideButton.js", "src/app/(educators)/create/[activity]/pag.js"],
   "exclude": ["node_modules"]
 }
