@@ -1,6 +1,11 @@
 import React from 'react';
 
-function SlideButtonR(props) {
+interface Props {
+    title: string;
+    to?: string;
+}
+
+function SlideButtonR(props: Props) {
     if(props.to) {
         return(
             <h2><a href={props.to} className="slide-r-hover"><span className="bwgradient-hover">{props.title}</span></a></h2>
@@ -12,7 +17,7 @@ function SlideButtonR(props) {
     }
 }
 
-function SlideButtonL(props) {
+function SlideButtonL(props: Props) {
     if(props.to) {
         return(
             <h2><a href={props.to} className="slide-l-hover"><span className="bwgradient-hover">{props.title}</span></a></h2>

@@ -26,6 +26,6 @@
     },
     "baseUrl": "."
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/create/page.js", "src/app/components/Header.js", "src/app/components/SlideButton.js", "src/app/(educators)/create/[activity]/pag.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/components/Header.tsx", "src/app/components/SlideButton.tsx"],
   "exclude": ["node_modules"]
 }

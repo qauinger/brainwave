@@ -36,7 +36,7 @@ function List() {
             <h2 className="activity-topic-title" style={{color: topics[topic]['color']}}>{topics[topic]['name']}</h2>
             <div style={{color: topics[topic]['color']}}>
                 {activitesByTopic[topic] == null ? null : activitesByTopic[topic].map((activity: string) =>
-                    <h2 key={activity}><Link className="color-hover" style={{'--data-color-hover': topics[topic]['color']} as React.CSSProperties} href={`create/${activity}`}>{activities[activity]['name']}</Link></h2>
+                    <h2 key={activity}><Link className="color-hover" style={{'--data-color-hover': topics[topic]['color']} as React.CSSProperties} href={`https://qauinger.com/brainwave/create/${activity}`}>{activities[activity]['name']}</Link></h2>
                 )}
             </div>
         </div>
