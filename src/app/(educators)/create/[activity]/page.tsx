@@ -159,20 +159,21 @@ export default function Activity({ params }: Props): JSX.Element {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(formData);
-    // const requestOptions = {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify(formData, null, null)
-    // };
-    // fetch('http://localhost:5502/gen', requestOptions)
-    // .then(response => {
-    //     var data = response.json();
-    //     data.then((response) => {
-    //         navigate(`/share/${response['uuid']}`);
-    //     })
-    // });
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    };
+    fetch('https://qauinger.com/brainwave/api', requestOptions)
+    .then(response => {
+        var data = response.json();
+        console.log(data)
+        // data.then((response) => {
+        //     navigate(`/share/${response['uuid']}`);
+        // })
+    });
   };
 
   return (
