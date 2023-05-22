@@ -168,12 +168,10 @@ export default function Activity({ params }: Props): JSX.Element {
     };
     fetch('https://qauinger.com/brainwave/api', requestOptions)
     .then(response => {
-      console.log(response);
         var data = response.json();
-        console.log(data)
-        // data.then((response) => {
-        //     navigate(`/share/${response['uuid']}`);
-        // })
+        data.then((response) => {
+            console.log(`${response['uuid']}`);
+        })
     });
   };
 
