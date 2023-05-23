@@ -1,7 +1,17 @@
+import Image from 'next/image';
+import icon from '@img/icon.svg';
+
 function Header() {
     return(
         <div id="header">
-            <a href="https://qauinger.com/brainwave"><img src='/img/icon.svg' alt="Brainwave"/>Brainwave</a>
+            <a href="https://qauinger.com/brainwave">
+                <Image
+                    src={icon}
+                    alt="Brainwave logo"
+                    priority={true}
+                />
+                Brainwave
+            </a>
         </div>
     );
 }
@@ -9,7 +19,14 @@ function Header() {
 function UnlinkedHeader() {
     return(
         <div id="header">
-            <a><img src='/img/icon.svg' alt="Brainwave"/>Brainwave</a>
+            <a>
+                <Image
+                    src={icon}
+                    alt="Brainwave logo"
+                    priority={true}
+                />
+                Brainwave
+            </a>
         </div>
     );
 }
