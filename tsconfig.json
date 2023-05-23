@@ -23,7 +23,8 @@
       "@/*": ["./src/*"],
       "@components/*": ["src/app/components/*"],
       "@curriculum/*": ["public/curriculum/*"],
-      "@css/*": ["public/css/*"]
+      "@css/*": ["public/css/*"],
+      "@img/*": ["public/img/*"]
     },
     "baseUrl": "."
   },
