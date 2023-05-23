@@ -1,6 +1,7 @@
 'use client';
 import '../create.css';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { SlideButtonR } from '@components/SlideButton';
 
 import activities from '@curriculum/activities.json';
@@ -130,6 +131,7 @@ interface MultiPropertyProps extends PropertyProps {
 }
 
 export default function Activity({ params }: Props): JSX.Element {
+  const { push } = useRouter();
   const activity: string = params.activity;
   if (!Object.keys(activitiesData).includes(activity)) {
     return <h1>Not found</h1>;
@@ -170,7 +172,8 @@ export default function Activity({ params }: Props): JSX.Element {
     .then(response => {
         var data = response.json();
         data.then((response) => {
-            console.log(`${response['uuid']}`);
+            console.log(`Generated new activity with UUID: ${response['uuid']}`);
+            push(`https://qauinger.com/brainwave/share/${response['uuid']}`);
         })
     });
   };

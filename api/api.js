@@ -43,7 +43,7 @@ app.post('/', (req, res) => {
     res.send(JSON.stringify({'uuid':uuid}));
 });
 
-app.get('/:uuid', (req, res) => {
+app.get('//:uuid', (req, res) => {
     var uuid = req.params.uuid;
     sql = `SELECT * FROM uuids WHERE uuid = ?;`;
     db.all(sql, [uuid], (err, rows) => {
