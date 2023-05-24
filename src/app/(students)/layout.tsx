@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Brainwave',
-  description: 'Targeted individualized activities designed by you.',
+  description: 'Targeted individualized activities.'
 }
 
 export default function RootLayout({
