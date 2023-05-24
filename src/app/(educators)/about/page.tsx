@@ -1,4 +1,15 @@
-export default function Home() {
+'use client';
+
+export default function About() {
+    var total = 0;
+    fetch('https://qauinger.com/brainwave/api/stats')
+    .then(response => {
+        var data = response.json();
+        data.then((response) => {
+            total = response['totalGenerated'];
+        })
+    });
+
     return (
         <div>
             <h1>About <span className="bwgradient">Brainwave</span></h1>
@@ -9,6 +20,8 @@ export default function Home() {
                 <p>Brainwave was designed to be as simple as possible. For students, this means no advertisements, no distracting animations, and no links to redirect to different pages. Teachers can set goals for individual students using simple configuration tool. For example, teachers can set different positions for addends for addition practice. The platform also offers a simple way to send activities to students by sharing a link that is unique to each activity you create.</p>
                 <h2>Extreme customization</h2>
                 <p>The biggest advantage that Brainwave has over other online platforms is the unparalled customization options for teachers. Activities can be made the way teachers need them to be!</p>
+                <h2>Statistics</h2>
+                <p>{total} activities have been created on Brainwave.</p>
                 <p className="floatr gray">brainwave v1.1.0</p>
             </div>
         </div>

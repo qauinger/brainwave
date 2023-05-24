@@ -156,13 +156,13 @@ export default function Activity({ params }: Props): JSX.Element {
             body: JSON.stringify(formData)
         };
         fetch('https://qauinger.com/brainwave/api/', requestOptions)
-            .then(response => {
-                var data = response.json();
-                data.then((response) => {
-                    console.log(`Generated new activity with UUID: ${response['uuid']}`);
-                    push(`https://qauinger.com/brainwave/share/${response['uuid']}`);
-                })
-            });
+        .then(response => {
+            var data = response.json();
+            data.then((response) => {
+                console.log(`Generated new activity with UUID: ${response['uuid']}`);
+                push(`https://qauinger.com/brainwave/share/${response['uuid']}`);
+            })
+        });
     };
 
     return (

@@ -40,10 +40,20 @@ app.post('/', (req, res) => {
         if(err) return console.error(err.message);
     });
 
+    console.log(`Generated new activity. (${uuid})`);
     res.send(JSON.stringify({'uuid':uuid}));
 });
 
-app.get('//:uuid', (req, res) => {
+app.get('/stats', (req, res) => {
+    var total = 0;
+    db.all('SELECT COUNT(*) as \'count\' FROM uuids;', (err, rows) => {
+        total = rows[0].count;
+    }).wait(() => {
+        res.send({'totalGenerated': total});
+    })
+});
+
+app.get('/:uuid([0-9a-f]{6})', (req, res) => {
     var uuid = req.params.uuid;
     sql = `SELECT * FROM uuids WHERE uuid = ?;`;
     db.all(sql, [uuid], (err, rows) => {
@@ -51,23 +61,14 @@ app.get('//:uuid', (req, res) => {
         if(rows.length > 0) {
             res.send(JSON.parse(rows[0]['data']));
         } else {
-            res.sendStatus(404);
+            res.status(400).send('Invalid uuid request');
         }
     })
-});
-
-app.get('/stats', (req, res) => {
-    var total = 0;
-    db.all("SELECT COUNT(*) as 'count' FROM uuids;", (err, rows) => {
-        total = rows[0].count;
-        console.log(total)
-    }).wait(() => {
-        res.send({total: total});
-    })
+    console.log(`Supplied request for activity (${uuid})`);
 });
 
 app.all('/', (req, res) => {
-    res.sendStatus(404);
+    res.sendStatus(400);
 })
 
 app.listen(port);
