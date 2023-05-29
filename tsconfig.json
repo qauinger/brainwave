@@ -4,7 +4,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -21,13 +21,15 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@components/*": ["src/app/components/*"],
+      "@component/*": ["src/app/component/*"],
       "@curriculum/*": ["public/curriculum/*"],
       "@css/*": ["public/css/*"],
-      "@img/*": ["public/img/*"]
+      "@img/*": ["public/img/*"],
+      "@gif/*": ["public/gif/*"],
+      "@activity/*": ["public/activity/*"],
     },
     "baseUrl": "."
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/components/Header.tsx", "src/app/components/SlideButton.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/component/Header.tsx", "src/app/component/SlideButton.tsx"],
   "exclude": ["node_modules"]
 }

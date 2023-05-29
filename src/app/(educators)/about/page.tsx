@@ -1,12 +1,15 @@
 'use client';
 
+import { useState } from "react";
+
 export default function About() {
-    var total = 0;
+    const [total, setTotal] = useState(0);
+    
     fetch('https://qauinger.com/brainwave/api/stats')
     .then(response => {
         var data = response.json();
         data.then((response) => {
-            total = response['totalGenerated'];
+            setTotal(response['totalGenerated']);
         })
     });
 

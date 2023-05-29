@@ -51,14 +51,6 @@
                                 "default": 25
                             }
                         },
-                        "untilScore": {
-                            "label": "Until Score",
-                            "type": "number",
-                            "attributes": {
-                                "min": 1,
-                                "default": 25
-                            }
-                        },
                         "unlimited": {
                             "label": "Unlimited",
                             "type": "label"
@@ -148,20 +140,27 @@
                                 "default": 25
                             }
                         },
-                        "untilScore": {
-                            "label": "Until Score",
-                            "type": "number",
-                            "attributes": {
-                                "min": 1,
-                                "default": 25
-                            }
-                        },
                         "unlimited": {
                             "label": "Unlimited",
                             "type": "label"
                         }
                     },
                     "default": "exactly"
+                }
+            },
+            "studentExperience": {
+                "label": "Student Experience",
+                "type": "selectMultiple",
+                "attributes": {
+                    "options": {
+                        "allowRetries": "Allow Retries",
+                        "displayScore": "Display score",
+                        "gifOnCorrect":"Show Animated GIF on Correct Response"
+                    },
+                    "default": [
+                        "allowRetries",
+                        "gifOnCorrect"
+                    ]
                 }
             }
         }
@@ -212,14 +211,6 @@
                     "options": {
                         "exactly": {
                             "label": "Exactly",
-                            "type": "number",
-                            "attributes": {
-                                "min": 1,
-                                "default": 25
-                            }
-                        },
-                        "untilScore": {
-                            "label": "Until Score",
                             "type": "number",
                             "attributes": {
                                 "min": 1,
@@ -309,14 +300,6 @@
                     "options": {
                         "exactly": {
                             "label": "Exactly",
-                            "type": "number",
-                            "attributes": {
-                                "min": 1,
-                                "default": 25
-                            }
-                        },
-                        "untilScore": {
-                            "label": "Until Score",
                             "type": "number",
                             "attributes": {
                                 "min": 1,

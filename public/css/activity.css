@@ -1,0 +1,88 @@
+#equation {
+    list-style: none;
+    text-align: center;
+}
+
+#equation li {
+    display: inline-flex;
+    padding: 0px 20px;
+    font-size: 80px;
+}
+
+#equation li h1 input {
+    font-family: 'Staatliches', cursive;
+    padding: 0px 0px;
+    border: 3px solid white;
+    border-radius: 10px;
+    outline-style: none;
+    font-size: 1em;
+    resize: none;
+    text-align: center;
+    color: #210042;
+    caret-color: transparent;
+    width: 2em;
+    border-width: 5px;
+}
+
+input::placeholder {
+    animation: blinking 1.5s ease infinite;
+}
+
+#equation li h1 input.wrong-answer {
+    background-color: rgb(255, 0, 0);
+    color: white;
+    animation: horizontal-shaking 0.3s linear infinite;
+}
+
+#equation li h1 input.correct-answer {
+    background-color: green;
+    color: white;
+    animation: pulsate-fwd 0.5s ease-in-out infinite both;
+}
+
+@keyframes horizontal-shaking {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(10px) }
+    50% { transform: translateX(-10px) }
+    75% { transform: translateX(10px) }
+    100% { transform: translateX(0) }
+}
+
+@keyframes blinking {
+    0% {
+        color: #210042; 
+    }
+    50% {
+        color: transparent;
+    }
+    100% {
+        color: #210042;
+    }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.correct-gif {
+    width: 20%;
+    margin-left: 40%;
+    height: auto;
+}
+
+@keyframes pulsate-fwd {
+    0% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+    50% {
+      -webkit-transform: scale(1.1);
+              transform: scale(1.1);
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+}

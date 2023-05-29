@@ -1,7 +1,7 @@
-import './create.css';
+import '@css/create.css';
 import Link from 'next/link';
 import topicsFile from '@curriculum/topics.json';
-import activitiesFile from '@curriculum/activities.json';
+import activitiesFile from '@curriculum/activity_properties.json';
 
 function Create() {
     return(

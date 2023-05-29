@@ -1,4 +1,4 @@
-import { SlideButtonR } from "@components/SlideButton"
+import { SlideButtonR } from "@component/SlideButton"
 
 export default function Home() {
   return (

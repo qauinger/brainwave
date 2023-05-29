@@ -1,10 +1,11 @@
 'use client';
-import '../create.css';
+
+import '@css/create.css';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { SlideButtonR } from '@components/SlideButton';
+import { SlideButtonR } from '@component/SlideButton';
 
-import activities from '@curriculum/activities.json';
+import activities from '@curriculum/activity_properties.json';
 
 interface ActivityData {
     name: string;
@@ -127,6 +128,8 @@ export default function Activity({ params }: Props): JSX.Element {
     const formData: FormData = {};
     const updateFormData = (id: string, data: any) => {
         formData[id] = data;
+        formData['activity'] = activity;
+        console.log(formData)
     };
 
     const title: TitleProperty = {
@@ -171,7 +174,7 @@ export default function Activity({ params }: Props): JSX.Element {
             <form id="form">
                 {properties}
                 <span onClick={handleSubmit}>
-                    <SlideButtonR title="Create activity" />
+                    <SlideButtonR title="Create activity"/>
                 </span>
             </form>
         </div>
@@ -359,7 +362,7 @@ function MultiProperty(props: MultiPropertyProps): JSX.Element {
 
     useEffect(() => {
         var bop: { [key: string]: any } = {};
-        bop[selected] = data.get(selected);
+        bop[selected] = data.get(selected) ?? '';
         props.updateData(props.id, bop);
         // eslint-disable-line react-hooks/exhaustive-deps
     }, [selected, data]);
