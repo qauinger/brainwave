@@ -17,6 +17,7 @@ export default function Activity(params: Props): JSX.Element {
     const [scoreDisplay, setScoreDisplay] = useState<string>('Score: 0');
     const [sumFirst, setSumFirst] = useState<boolean>(false);
     var QUESTIONS_ANSWERED: number = 0;
+    var QUESTIONS_CORRECT: number = 0;
 
     var SETS: [p1: number | ReactElement, p2: number | ReactElement, p3: number | ReactElement, sumFirst: boolean, answer: number][] = [];
     var CURRENTANSWER: number = 0;
@@ -76,6 +77,9 @@ export default function Activity(params: Props): JSX.Element {
         if(Object.keys(numberOfQuestions)[0] == 'exactly' && QUESTIONS_ANSWERED == numberOfQuestions['exactly']) {
             end();
             return;
+        } else if(Object.keys(numberOfQuestions)[0] == 'untilScore' && QUESTIONS_CORRECT == numberOfQuestions['untilScore']) {
+            end();
+            return;
         }
 
         if(SETS.length == 0) {
@@ -109,6 +113,7 @@ export default function Activity(params: Props): JSX.Element {
         }
         if(parseInt(box.value) === CURRENTANSWER) {
             QUESTIONS_ANSWERED++;
+            QUESTIONS_CORRECT++;
             box.classList.add('correct-answer');
             if(gifOnCorrect)
                 setDisplayGif(true);
@@ -117,8 +122,9 @@ export default function Activity(params: Props): JSX.Element {
                 setDisplayGif(false);
                 box.classList.remove('correct-answer');
                 newProblem();
-            }, 1200);
+            }, 1500);
         } else {
+            QUESTIONS_ANSWERED++;
             box.classList.add('wrong-answer');
             setTimeout(() => {
                 box.value = '';
@@ -128,7 +134,11 @@ export default function Activity(params: Props): JSX.Element {
                 }
             }, 600);
         }
-        setScoreDisplay('Score: ' + QUESTIONS_ANSWERED);
+        if(allowRetries) {
+            setScoreDisplay(`Score: ${QUESTIONS_CORRECT} (${QUESTIONS_ANSWERED} attempts)`);
+        } else {
+            setScoreDisplay(`Score: ${QUESTIONS_CORRECT}/${QUESTIONS_ANSWERED}`);
+        }
     }
 
     useEffect(() => {
@@ -152,7 +162,7 @@ export default function Activity(params: Props): JSX.Element {
 
     return (
         <>
-            <h2>{displayScore ? scoreDisplay : ''}</h2>
+            <h2 id='score'>{displayScore || !inProgress ? scoreDisplay : ''}</h2>
             <div id="content">
                 {inProgress ? <ol id="equation">
                     <li><h1>{p1}</h1></li>
