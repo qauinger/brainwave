@@ -33,6 +33,7 @@ export default function Activity(params: Props): JSX.Element {
     
     const MAX_DIGITS = sum.toString().length;
     const ANSWER_REGEX = '^(?:0*)(?=0)?0?([0-9]{1,' + MAX_DIGITS + '})';
+    var INPUT_ENABLED = true;
 
     function generateSets() {
         const input = <input type='number' id='answer' placeholder='?' />;
@@ -99,7 +100,8 @@ export default function Activity(params: Props): JSX.Element {
     function checkAnswer() {
         var box = document.getElementById('answer') as HTMLInputElement;
         var gif = document.getElementById('gif') as HTMLInputElement;
-        if(box === null) {
+        if(box === null || box.value === '') {
+            INPUT_ENABLED = true;
             return;
         }
         if(parseInt(box.value) === CURRENTANSWER) {
@@ -117,6 +119,7 @@ export default function Activity(params: Props): JSX.Element {
                 setTimeout(() => {
                     setDisplayGif(true);
                 }, 100);
+                INPUT_ENABLED = true;
             }, 1500);
         } else {
             QUESTIONS_ANSWERED++;
@@ -127,6 +130,7 @@ export default function Activity(params: Props): JSX.Element {
                 if(!allowRetries) {
                     newProblem();
                 }
+                INPUT_ENABLED = true;
             }, 600);
         }
         if(allowRetries) {
@@ -139,20 +143,22 @@ export default function Activity(params: Props): JSX.Element {
     useEffect(() => {
         document.addEventListener('keydown', function(event) {
             event.preventDefault();
-            console.log(event.code)
-            if (event.code == 'Enter' || event.code == 'NumpadEnter') {
-                checkAnswer();
-            } else if(event.code.substring(0, 5) == 'Digit' && !event.altKey && !event.shiftKey) {
-                var num = event.code.substring(5, 6)
-                var answer = document.getElementById('answer') as HTMLInputElement;
-                answer.value = validateNumberFormat(answer.value + '' + num)
-            } else if(event.code.substring(0, 6) == 'Numpad' && !event.altKey && !event.shiftKey) {
-                var num = event.code.substring(6, 7)
-                var answer = document.getElementById('answer') as HTMLInputElement;
-                answer.value = validateNumberFormat(answer.value + '' + num)
-            } else if(event.code == 'Backspace' || event.code == 'NumpadDelete') {
-                var answer = document.getElementById('answer') as HTMLInputElement;
-                answer.value = validateNumberFormat(answer.value.toString().substring(0, answer.value.toString().length - 1))
+            if(INPUT_ENABLED) {
+                if (event.code == 'Enter' || event.code == 'NumpadEnter') {
+                    INPUT_ENABLED = false;
+                    checkAnswer();
+                } else if(event.code.substring(0, 5) == 'Digit' && !event.altKey && !event.shiftKey) {
+                    var num = event.code.substring(5, 6)
+                    var answer = document.getElementById('answer') as HTMLInputElement;
+                    answer.value = validateNumberFormat(answer.value + '' + num)
+                } else if(event.code.substring(0, 6) == 'Numpad' && !event.altKey && !event.shiftKey) {
+                    var num = event.code.substring(6, 7)
+                    var answer = document.getElementById('answer') as HTMLInputElement;
+                    answer.value = validateNumberFormat(answer.value + '' + num)
+                } else if(event.code == 'Backspace' || event.code == 'NumpadDelete') {
+                    var answer = document.getElementById('answer') as HTMLInputElement;
+                    answer.value = validateNumberFormat(answer.value.toString().substring(0, answer.value.toString().length - 1))
+                }
             }
         });
         generateSets();
