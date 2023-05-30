@@ -74,6 +74,11 @@ input::-webkit-inner-spin-button {
     width: 20%;
     margin-left: 40%;
     height: auto;
+    display: none;
+}
+
+.correct-gif.show {
+    display: block;
 }
 
 @keyframes pulsate-fwd {

@@ -25,7 +25,7 @@ export default function RandomGif() {
 
     return (
         <div>
-            <Image className='correct-gif' src={gifUrl} alt="Celebratory GIF" width={100} height={100} placeholder='empty' loading='eager'/>
+            <Image id='gif' className='correct-gif' src={gifUrl} alt="Celebratory GIF" width={100} height={100} placeholder='empty' loading='eager'/>
         </div>
     );
 }

@@ -12,7 +12,7 @@ export default function Activity(params: Props): JSX.Element {
     const [p1, setP1] = useState<number | ReactElement>();
     const [p2, setP2] = useState<number | ReactElement>();
     const [p3, setP3] = useState<number | ReactElement>();
-    const [displayGif, setDisplayGif] = useState<boolean>(false);
+    const [displayGif, setDisplayGif] = useState<boolean>(true);
     const [inProgress, setInProgress] = useState<boolean>(true);
     const [scoreDisplay, setScoreDisplay] = useState<string>('Score: 0');
     const [sumFirst, setSumFirst] = useState<boolean>(false);
@@ -108,6 +108,7 @@ export default function Activity(params: Props): JSX.Element {
 
     function checkAnswer() {
         var box = document.getElementById('answer') as HTMLInputElement;
+        var gif = document.getElementById('gif') as HTMLInputElement;
         if(box === null) {
             return;
         }
@@ -115,13 +116,17 @@ export default function Activity(params: Props): JSX.Element {
             QUESTIONS_ANSWERED++;
             QUESTIONS_CORRECT++;
             box.classList.add('correct-answer');
+            gif.classList.add('show');
             if(gifOnCorrect)
-                setDisplayGif(true);
             setTimeout(() => {
                 box.value = '';
                 setDisplayGif(false);
+                gif.classList.remove('show');
                 box.classList.remove('correct-answer');
                 newProblem();
+                setTimeout(() => {
+                    setDisplayGif(true);
+                }, 100);
             }, 1500);
         } else {
             QUESTIONS_ANSWERED++;
@@ -144,13 +149,18 @@ export default function Activity(params: Props): JSX.Element {
     useEffect(() => {
         document.addEventListener('keydown', function(event) {
             event.preventDefault();
-            if (event.code == 'Enter') {
+            console.log(event.code)
+            if (event.code == 'Enter' || event.code == 'NumpadEnter') {
                 checkAnswer();
             } else if(event.code.substring(0, 5) == 'Digit' && !event.altKey && !event.shiftKey) {
                 var num = event.code.substring(5, 6)
                 var answer = document.getElementById('answer') as HTMLInputElement;
                 answer.value = validateNumberFormat(answer.value + '' + num)
-            } else if(event.code == 'Backspace') {
+            } else if(event.code.substring(0, 6) == 'Numpad' && !event.altKey && !event.shiftKey) {
+                var num = event.code.substring(6, 7)
+                var answer = document.getElementById('answer') as HTMLInputElement;
+                answer.value = validateNumberFormat(answer.value + '' + num)
+            } else if(event.code == 'Backspace' || event.code == 'NumpadDelete') {
                 var answer = document.getElementById('answer') as HTMLInputElement;
                 answer.value = validateNumberFormat(answer.value.toString().substring(0, answer.value.toString().length - 1))
             }
@@ -162,7 +172,7 @@ export default function Activity(params: Props): JSX.Element {
 
     return (
         <>
-            <h2 id='score'>{displayScore || !inProgress ? scoreDisplay : ''}</h2>
+            <h4 id='score'>{displayScore || !inProgress ? scoreDisplay : ''}</h4>
             <div id="content">
                 {inProgress ? <ol id="equation">
                     <li><h1>{p1}</h1></li>
