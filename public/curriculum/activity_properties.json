@@ -74,7 +74,7 @@
                     "options": {
                         "allowRetries": "Allow Retries",
                         "displayScore": "Display score",
-                        "gifOnCorrect":"Show Animated GIF on Correct Response"
+                        "gifOnCorrect": "Show Animated GIF on Correct Response"
                     },
                     "default": [
                         "allowRetries",
@@ -193,7 +193,7 @@
                     "options": {
                         "allowRetries": "Allow Retries",
                         "displayScore": "Display score",
-                        "gifOnCorrect":"Show Animated GIF on Correct Response"
+                        "gifOnCorrect": "Show Animated GIF on Correct Response"
                     },
                     "default": [
                         "allowRetries",
@@ -330,11 +330,11 @@
                 "type": "selectMultiple",
                 "attributes": {
                     "options": {
-                        "sumLast": "# - # = #",
-                        "sumFirst": "# = # - #"
+                        "differenceLast": "# - # = #",
+                        "differenceFirst": "# = # - #"
                     },
                     "default": [
-                        "sumLast"
+                        "differenceLast"
                     ]
                 }
             },
@@ -351,12 +351,42 @@
                                 "default": 25
                             }
                         },
+                        "untilScore": {
+                            "label": "Until Score",
+                            "type": "number",
+                            "attributes": {
+                                "min": 1,
+                                "default": 25
+                            }
+                        },
                         "unlimited": {
                             "label": "Unlimited",
                             "type": "label"
                         }
                     },
                     "default": "exactly"
+                }
+            },
+            "studentExperience": {
+                "label": "Student Experience",
+                "type": "selectMultiple",
+                "attributes": {
+                    "options": {
+                        "allowRetries": "Allow Retries",
+                        "displayScore": "Display score",
+                        "gifOnCorrect": "Show Animated GIF on Correct Response"
+                    },
+                    "default": [
+                        "allowRetries",
+                        "gifOnCorrect"
+                    ]
+                }
+            },
+            "completionMessage": {
+                "label": "Completion Message",
+                "type": "string",
+                "attributes": {
+                    "default": "Activity completed, nice job!"
                 }
             }
         }
