@@ -12,7 +12,7 @@ export default function Activity(params: Props): JSX.Element {
     const [p1, setP1] = useState<number | ReactElement>();
     const [p2, setP2] = useState<number | ReactElement>();
     const [p3, setP3] = useState<number | ReactElement>();
-    const [displayGif, setDisplayGif] = useState<boolean>(false);
+    const [displayGif, setDisplayGif] = useState<boolean>(true);
     const [inProgress, setInProgress] = useState<boolean>(true);
     const [scoreDisplay, setScoreDisplay] = useState<string>('Score: 0');
     const [sumFirst, setSumFirst] = useState<boolean>(false);
@@ -22,8 +22,7 @@ export default function Activity(params: Props): JSX.Element {
     var SETS: [p1: number | ReactElement, p2: number | ReactElement, p3: number | ReactElement, sumFirst: boolean, answer: number][] = [];
     var CURRENTANSWER: number = 0;
     
-    const addend: number | number[] = Object.keys(params.properties.addend)[0] == 'specific' ? params.properties.addend.specific : Object.keys(params.properties.addend)[0] == 'range' ? Array.from({ length: params.properties.addend.range.max - params.properties.addend.range.min + 1 }, (v, i) => i + params.properties.addend.range.min) : 0;
-    const shouldNotExceed: number = params.properties.maxSum;
+    const sum: number = params.properties.sum;
     const missingPosition: string[] = params.properties.missingPosition;
     const equationFormat: string[] = params.properties.equationFormat;
     const numberOfQuestions: {} = params.properties.numberOfQuestions;
@@ -32,45 +31,36 @@ export default function Activity(params: Props): JSX.Element {
     const gifOnCorrect: boolean = params.properties.studentExperience.includes('gifOnCorrect');
     const completionMessage: string = params.properties.completionMessage;
     
-    const MAX_DIGITS = shouldNotExceed.toString().length;
+    const MAX_DIGITS = sum.toString().length;
     const ANSWER_REGEX = '^(?:0*)(?=0)?0?([0-9]{1,' + MAX_DIGITS + '})';
 
     function generateSets() {
         const input = <input type='number' id='answer' placeholder='?' />;
 
-        var bitsToAdd = [];
-        if(typeof addend === 'number') {
-            bitsToAdd.push(addend);
-        } else {
-            bitsToAdd = addend;
-        }
-
-        bitsToAdd.forEach((bit) => {
-            for(var i = 0; i + bit <= shouldNotExceed; i++) {
-                if(equationFormat.includes('sumLast')) {
-                    if(missingPosition.includes('addend1')) {
-                        SETS.push([input, bit, i + bit, false, i]);
-                    }
-                    if(missingPosition.includes('addend2')) {
-                        SETS.push([i, input, i + bit, false, bit]);
-                    }
-                    if(missingPosition.includes('sum')) {
-                        SETS.push([i, bit, input, false, i + bit]);
-                    }
+        for(var i = 0; i <= sum; i++) {
+            if(equationFormat.includes('sumLast')) {
+                if(missingPosition.includes('addend1')) {
+                    SETS.push([input, sum - i, sum, false, i]);
                 }
-                if(equationFormat.includes('sumFirst')) {
-                    if(missingPosition.includes('addend1')) {
-                        SETS.push([i + bit, input, bit, true, i]);
-                    }
-                    if(missingPosition.includes('addend2')) {
-                        SETS.push([i + bit, i, input, true, bit]);
-                    }
-                    if(missingPosition.includes('sum')) {
-                        SETS.push([input, i, bit, true, i + bit]);
-                    }
+                if(missingPosition.includes('addend2')) {
+                    SETS.push([i, input, sum, false, sum - i]);
+                }
+                if(missingPosition.includes('sum')) {
+                    SETS.push([i, sum - i, input, false, sum]);
                 }
             }
-        });
+            if(equationFormat.includes('sumFirst')) {
+                if(missingPosition.includes('addend1')) {
+                    SETS.push([sum, input, sum - i, true, i]);
+                }
+                if(missingPosition.includes('addend2')) {
+                    SETS.push([sum, i, input, true, sum - i]);
+                }
+                if(missingPosition.includes('sum')) {
+                    SETS.push([input, i, sum - i, true, sum]);
+                }
+            }
+        }
     }
 
     function newProblem() {
@@ -108,6 +98,7 @@ export default function Activity(params: Props): JSX.Element {
 
     function checkAnswer() {
         var box = document.getElementById('answer') as HTMLInputElement;
+        var gif = document.getElementById('gif') as HTMLInputElement;
         if(box === null) {
             return;
         }
@@ -115,13 +106,17 @@ export default function Activity(params: Props): JSX.Element {
             QUESTIONS_ANSWERED++;
             QUESTIONS_CORRECT++;
             box.classList.add('correct-answer');
+            gif.classList.add('show');
             if(gifOnCorrect)
-                setDisplayGif(true);
             setTimeout(() => {
                 box.value = '';
                 setDisplayGif(false);
+                gif.classList.remove('show');
                 box.classList.remove('correct-answer');
                 newProblem();
+                setTimeout(() => {
+                    setDisplayGif(true);
+                }, 100);
             }, 1500);
         } else {
             QUESTIONS_ANSWERED++;
@@ -144,13 +139,18 @@ export default function Activity(params: Props): JSX.Element {
     useEffect(() => {
         document.addEventListener('keydown', function(event) {
             event.preventDefault();
-            if (event.code == 'Enter') {
+            console.log(event.code)
+            if (event.code == 'Enter' || event.code == 'NumpadEnter') {
                 checkAnswer();
             } else if(event.code.substring(0, 5) == 'Digit' && !event.altKey && !event.shiftKey) {
                 var num = event.code.substring(5, 6)
                 var answer = document.getElementById('answer') as HTMLInputElement;
                 answer.value = validateNumberFormat(answer.value + '' + num)
-            } else if(event.code == 'Backspace') {
+            } else if(event.code.substring(0, 6) == 'Numpad' && !event.altKey && !event.shiftKey) {
+                var num = event.code.substring(6, 7)
+                var answer = document.getElementById('answer') as HTMLInputElement;
+                answer.value = validateNumberFormat(answer.value + '' + num)
+            } else if(event.code == 'Backspace' || event.code == 'NumpadDelete') {
                 var answer = document.getElementById('answer') as HTMLInputElement;
                 answer.value = validateNumberFormat(answer.value.toString().substring(0, answer.value.toString().length - 1))
             }
@@ -162,7 +162,7 @@ export default function Activity(params: Props): JSX.Element {
 
     return (
         <>
-            <h2 id='score'>{displayScore || !inProgress ? scoreDisplay : ''}</h2>
+            <h4 id='score'>{displayScore || !inProgress ? scoreDisplay : ''}</h4>
             <div id="content">
                 {inProgress ? <ol id="equation">
                     <li><h1>{p1}</h1></li>
