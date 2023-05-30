@@ -4,6 +4,7 @@ import AddingNum from '@activity/addingNum';
 import AdditionFactsOfNum from '@activity/additionFactsOfNum';
 import SubtractingNum from '@activity/subtractingNum';
 import AddingDoubles from '@activity/addingDoubles';
+import AddingDoublesPlusNum from '@activity/addingDoublesPlusNum';
 
 interface Props {
     data: {
@@ -19,6 +20,7 @@ export default function Activity(params: Props): JSX.Element {
         case 'additionFactsOfNum': return(<AdditionFactsOfNum properties={properties}/>)
         case 'subtractingNum': return(<SubtractingNum properties={properties}/>)
         case 'addingDoubles': return(<AddingDoubles properties={properties}/>)
-        default: return(<></>);
+        case 'addingDoublesPlusNum': return(<AddingDoublesPlusNum properties={properties}/>)
+        default: return(<>Invalid activity</>);
     }
 }
