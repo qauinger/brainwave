@@ -23,7 +23,7 @@ export default function Activity(params: Props): JSX.Element {
     var CURRENTANSWER: number = 0;
     
     const minuend: number = params.properties.minuend;
-    const subtrahend: number | number[] = Object.keys(params.properties.addend)[0] == 'specific' ? params.properties.addend.specific : Object.keys(params.properties.addend)[0] == 'range' ? Array.from({ length: params.properties.addend.range.max - params.properties.addend.range.min + 1 }, (v, i) => i + params.properties.addend.range.min) : 0;
+    const subtrahend: number | number[] = Object.keys(params.properties.subtrahend)[0] == 'specific' ? params.properties.subtrahend.specific : Object.keys(params.properties.subtrahend)[0] == 'range' ? Array.from({ length: params.properties.subtrahend.range.max - params.properties.subtrahend.range.min + 1 }, (v, i) => i + params.properties.subtrahend.range.min) : 0;
     const missingPosition: string[] = params.properties.missingPosition;
     const equationFormat: string[] = params.properties.equationFormat;
     const numberOfQuestions: {} = params.properties.numberOfQuestions;
