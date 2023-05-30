@@ -1,3 +1,5 @@
+'use client';
+
 import '@css/activity.css';
 import { ReactElement, useEffect, useState } from 'react';
 import RandomGif from '@component/RandomGif';
@@ -10,7 +12,8 @@ export default function Activity(params: Props): JSX.Element {
     const [p1, setP1] = useState<number | ReactElement>();
     const [p2, setP2] = useState<number | ReactElement>();
     const [p3, setP3] = useState<number | ReactElement>();
-    const [gif, setGif] = useState<string | ReactElement>('');
+    const [displayGif, setDisplayGif] = useState<boolean>(false);
+    const [inProgress, setInProgress] = useState<boolean>(true);
     const [scoreDisplay, setScoreDisplay] = useState<string>('Score: 0');
     const [sumFirst, setSumFirst] = useState<boolean>(false);
     var QUESTIONS_ANSWERED: number = 0;
@@ -26,6 +29,7 @@ export default function Activity(params: Props): JSX.Element {
     const allowRetries: boolean = params.properties.studentExperience.includes('allowRetries');
     const displayScore: boolean = params.properties.studentExperience.includes('displayScore');
     const gifOnCorrect: boolean = params.properties.studentExperience.includes('gifOnCorrect');
+    const completionMessage: string = params.properties.completionMessage;
     
     const MAX_DIGITS = shouldNotExceed.toString().length;
     const ANSWER_REGEX = '^(?:0*)(?=0)?0?([0-9]{1,' + MAX_DIGITS + '})';
@@ -87,9 +91,7 @@ export default function Activity(params: Props): JSX.Element {
     }
 
     function end() {
-        setP1(-1);
-        setP2(-1);
-        setP3(-1);
+        setInProgress(false);
     }
 
     function validateNumberFormat(value: string) {
@@ -109,10 +111,10 @@ export default function Activity(params: Props): JSX.Element {
             QUESTIONS_ANSWERED++;
             box.classList.add('correct-answer');
             if(gifOnCorrect)
-                setGif(<RandomGif />);
+                setDisplayGif(true);
             setTimeout(() => {
                 box.value = '';
-                setGif('');
+                setDisplayGif(false);
                 box.classList.remove('correct-answer');
                 newProblem();
             }, 1200);
@@ -142,7 +144,6 @@ export default function Activity(params: Props): JSX.Element {
                 var answer = document.getElementById('answer') as HTMLInputElement;
                 answer.value = validateNumberFormat(answer.value.toString().substring(0, answer.value.toString().length - 1))
             }
-            // setAnswerBoxWidth();
         });
         generateSets();
         newProblem();
@@ -153,14 +154,18 @@ export default function Activity(params: Props): JSX.Element {
         <>
             <h2>{displayScore ? scoreDisplay : ''}</h2>
             <div id="content">
-                <ol id="equation">
+                {inProgress ? <ol id="equation">
                     <li><h1>{p1}</h1></li>
                     <li><h1>{sumFirst ? '=' : '+'}</h1></li>
                     <li><h1>{p2}</h1></li>
                     <li><h1>{sumFirst ? '+' : '='}</h1></li>
                     <li><h1>{p3}</h1></li>
-                </ol>
-                {gif}
+                </ol> : null}
+                {!inProgress ? <>
+                    <h3>{completionMessage}</h3>
+                    <RandomGif />
+                </> : null}
+                {displayGif ? <RandomGif /> : null}
             </div>
         </>
     )

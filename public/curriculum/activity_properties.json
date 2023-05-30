@@ -162,6 +162,13 @@
                         "gifOnCorrect"
                     ]
                 }
+            },
+            "completionMessage": {
+                "label": "Completion Message",
+                "type": "string",
+                "attributes": {
+                    "default": "Activity completed, nice job!"
+                }
             }
         }
     },

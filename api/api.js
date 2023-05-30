@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 import express from 'express';
 import { randomUUID } from 'crypto';
 import sqlite3 from 'sqlite3';
@@ -19,6 +20,8 @@ sql = `CREATE TABLE uuids(uuid text PRIMARY KEY UNIQUE, data text NOT NULL, crea
 db.run(sql, (err) => {
     if(!err) return console.log('[SQL] Created database table.');
 });
+
+const files = fs.readdirSync('gif').filter(file => file.endsWith('.gif'));
 
 const app = express();
 const port = 3001;
@@ -65,6 +68,11 @@ app.get('/:uuid([0-9a-f]{6})', (req, res) => {
         }
     })
     console.log(`Supplied request for activity (${uuid})`);
+});
+
+app.get('/gif', (req, res) => {
+    console.log('BOP')
+    res.sendFile(path.resolve() + '/gif/' + files[Math.floor((Math.random() * files.length))]);
 });
 
 app.all('/', (req, res) => {
