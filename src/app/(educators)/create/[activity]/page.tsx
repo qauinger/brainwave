@@ -175,6 +175,10 @@ export default function Activity({ params }: Props): JSX.Element {
                 {properties}
                 <span onClick={handleSubmit}>
                     <SlideButtonR title="Create activity"/>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                 </span>
             </form>
         </div>
