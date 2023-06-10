@@ -590,5 +590,116 @@
                 }
             }
         }
+    },
+    "multiplyingDoubles": {
+        "name": "Multiplying Doubles",
+        "topic": "multiplication",
+        "properties": {
+            "doublesOf": {
+                "label": "Doubles of",
+                "type": "multi",
+                "attributes": {
+                    "options": {
+                        "specific": {
+                            "label": "Specific",
+                            "type": "number",
+                            "attributes": {
+                                "min": 0,
+                                "default": 1
+                            }
+                        },
+                        "range": {
+                            "label": "Range",
+                            "type": "range",
+                            "attributes": {
+                                "min": 0,
+                                "defaultmin": 1,
+                                "defaultmax": 10,
+                                "default": 0
+                            }
+                        }
+                    },
+                    "default": "range"
+                }
+            },
+            "missingPosition": {
+                "label": "Missing Position",
+                "type": "selectMultiple",
+                "attributes": {
+                    "options": {
+                        "multiplicand": "Multiplicand",
+                        "multiplier": "Multiplier",
+                        "product": "Product"
+                    },
+                    "default": [
+                        "product"
+                    ]
+                }
+            },
+            "equationFormat": {
+                "label": "Equation Format",
+                "type": "selectMultiple",
+                "attributes": {
+                    "options": {
+                        "productLast": "# x # = #",
+                        "productFirst": "# = # x #"
+                    },
+                    "default": [
+                        "productLast"
+                    ]
+                }
+            },
+            "numberOfQuestions": {
+                "label": "Number of Questions",
+                "type": "multi",
+                "attributes": {
+                    "options": {
+                        "exactly": {
+                            "label": "Exactly",
+                            "type": "number",
+                            "attributes": {
+                                "min": 1,
+                                "default": 25
+                            }
+                        },
+                        "untilScore": {
+                            "label": "Until Score",
+                            "type": "number",
+                            "attributes": {
+                                "min": 1,
+                                "default": 25
+                            }
+                        },
+                        "unlimited": {
+                            "label": "Unlimited",
+                            "type": "label"
+                        }
+                    },
+                    "default": "exactly"
+                }
+            },
+            "studentExperience": {
+                "label": "Student Experience",
+                "type": "selectMultiple",
+                "attributes": {
+                    "options": {
+                        "allowRetries": "Allow Retries",
+                        "displayScore": "Display score",
+                        "gifOnCorrect": "Show Animated GIF on Correct Response"
+                    },
+                    "default": [
+                        "allowRetries",
+                        "gifOnCorrect"
+                    ]
+                }
+            },
+            "completionMessage": {
+                "label": "Completion Message",
+                "type": "string",
+                "attributes": {
+                    "default": "Activity completed, nice job!"
+                }
+            }
+        }
     }
 }

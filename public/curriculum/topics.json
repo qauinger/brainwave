@@ -6,6 +6,9 @@
     "subtraction": {
         "name": "Subtraction",
         "color": "#eb4d6f"
+    },
+    "multiplication": {
+        "name": "Multiplication",
+        "color": "#ff971a"
     }
 }
-  
